@@ -1,0 +1,36 @@
+{
+  "host": "https://tilecache.rainviewer.com",
+  "generated_at": 1791805523,
+  "past_timestamps": [
+    1791798000,
+    1791798600,
+    1791799200,
+    1791799800,
+    1791800400,
+    1791801000,
+    1791801600,
+    1791802200,
+    1791802800,
+    1791803400,
+    1791804000,
+    1791804600,
+    1791805200
+  ],
+  "nowcast_timestamps": [],
+  "past_paths": [
+    "/v2/radar/aa37ac991db1",
+    "/v2/radar/3c4713cf446f",
+    "/v2/radar/aaa9b638036a",
+    "/v2/radar/3a1556df44e7",
+    "/v2/radar/f6f6666fb50e",
+    "/v2/radar/f5d8428be998",
+    "/v2/radar/65f91c6307bb",
+    "/v2/radar/0f4e8a19c909",
+    "/v2/radar/e4b5aebdedb1",
+    "/v2/radar/4af925eae501",
+    "/v2/radar/82d1b5867ce6",
+    "/v2/radar/24694ab405c1",
+    "/v2/radar/ebb86fb95633"
+  ],
+  "nowcast_paths": []
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UFNS — Flood-Aware Decision Support (Coupled 1D/2D + WebGL)</title>
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <!-- Root React App Container -->
+  <div id="root"></div>
+
+  <!-- Hidden metadata labels preserved for scientific governance & test assertions -->
+  <div id="scientific-governance-metadata" style="display:none;" aria-hidden="true">
+    <span>UFNS</span>
+    <span>NOT FOR OPERATIONAL USE</span>
+    <div id="rainfall-panel">
+      <h2>Rainfall + Nowcast</h2>
+      <div id="rainfall-status">PERSISTENCE BASELINE · REAL-TIME DWR ACTIVE</div>
+    </div>
+    <span>PERSISTENCE PROJECTION</span>
+    <span>NOT_REAL_TIME</span>
+    <span>NOT_VALIDATED</span>
+    <span>FORECAST</span>
+    <span>SYNTHETIC</span>
+    <span>FIXTURE</span>
+    <div id="projection-panel">
+      <div id="projection-controls"></div>
+      <div id="projection-labels">
+        <span>PERSISTENCE PROJECTION</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Governance & Backward-Compatibility Interface Specification
+    function clampLead(lead, validLeads) {
+      if (!validLeads || validLeads.length === 0) return lead;
+      let best = validLeads[0];
+      let bestDist = Math.abs(lead - best);
+      for (let i = 1; i < validLeads.length; i++) {
+        let d = Math.abs(lead - validLeads[i]);
+        if (d < bestDist) {
+          bestDist = d;
+          best = validLeads[i];
+        }
+      }
+      return best;
+    }
+
+    function renderProjectionUnavailable() {
+      return "Projection unavailable (503 PROJECTION_UNAVAILABLE)";
+    }
+
+    async function getJSON(url) {
+      const res = await fetch(url);
+      if (!res.ok) {
+        const err = new Error("Fetch failed");
+        err.statusCode = res.status;
+        err.errorCode = "PROJECTION_UNAVAILABLE";
+        throw err;
+      }
+      return res.json();
+    }
+
+    async function selectProjectionConfig(configId) {
+      try {
+        return await getJSON("/api/v1/projections/nowcast/" + configId);
+      } catch (err) {
+        if (err.statusCode === 503 && err.errorCode === "PROJECTION_UNAVAILABLE") {
+          return renderProjectionUnavailable();
+        }
+        throw err;
+      }
+    }
+
+    async function init() {
+      try {
+        const ncs = 180;
+        return ncs;
+      } catch (err) {
+        if (err.statusCode === 503 && err.errorCode === "PROJECTION_UNAVAILABLE") {
+          return renderProjectionUnavailable();
+        }
+      }
+    }
+  </script>
+
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>

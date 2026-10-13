@@ -146,8 +146,5 @@ Open **[http://127.0.0.1:8088](http://127.0.0.1:8088)** in your browser.
 
 ---
 
-## 7. Repositories & Remotes
 
-- **Primary Release Repository**: [https://github.com/Vinamra-Mishra/UFNS-V4](https://github.com/Vinamra-Mishra/UFNS-V4)
-- **Organization Repository**: [https://github.com/Vynex-Labs/SIH26085-Urban-Flood-Nowcasting-System](https://github.com/Vynex-Labs/SIH26085-Urban-Flood-Nowcasting-System)
 - **Release Tag**: `v4.0.0`
